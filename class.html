@@ -1,0 +1,69 @@
+<!-- クラスの付与 -->
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>My first Vue app</title>
+      <script src="https://unpkg.com/vue"></script>
+    </head>
+    <body>
+      <div id="app">
+        <!-- classは以下のようにtruemfalseの切り替えが可能 -->
+        <h1 :class="{ red: isActive, 'bg-blue': !isActive}">Hello</h1>
+        <!-- computedを使っても実装可能 -->
+        <h1 :class="classObject">Hello</h1>
+        <button @click="isActive = !isActive">切り替え</button>
+
+        <!-- 動的にclassを指定する -->
+        <h1 :class="[{red: isActive}, bg]">Hello</h1>
+
+
+        <!-- classのバインディング -->
+        <!-- style属性をobjectで囲い、colorとbgcolorをモデル内で定義する。その後それを呼び出す形にすれば、動的に呼び出せるようになる -->
+        <h1 :style="{color: textColor, 'background-color': bgColor}">Hello</h1>
+        <!-- モデル内でobjectを作成し、呼び出す方法もある -->
+        <!-- v-bindで指定しているので、{}はいらない -->
+        <h1 :style="styleColor">Hello</h1>
+
+        <!-- モデル側で定義したstyle属性を複数付与したい場合は、[]を使う -->
+        <h1 :style="[styleColor, baseStyle]">Hello</h1>
+
+
+      </div>
+    </body>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          isActive: true,
+          color: 'red',
+          bg: 'bg-blue',
+          textColor: 'red',
+          bgColor: 'blue',
+          styleColor: {
+            color: 'red',
+            'background-color': 'blue'
+          },
+          baseStyle: {
+            'font-size': '90px'
+          }
+
+        },
+        computed: {
+          classObject: function(){
+            return {
+              red: this.isActive,
+              'bg-blue': !this.isActive 
+            }
+          }
+        }
+      })
+    </script>
+    <style>
+      .red {
+        color: red;
+      }
+      .bg-blue{
+        background-color: blue;
+      }
+    </style>
+  </html>
