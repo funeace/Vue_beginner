@@ -1,0 +1,66 @@
+<!-- v-on -->
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>My first Vue app</title>
+      <script src="https://unpkg.com/vue"></script>
+    </head>
+    <body>
+      <div id="app">
+        <p>現在{{ number }}回クリックされています</p>
+        <!-- v-onはどんなイベントが発生したかを指定する -->
+        <button v-on:click="number += 1">カウントアップ</button>
+        <!-- v-onはイベント発生時のメソッドを指定できる -->
+        <button v-on:click="countUp">カウントアップ</button>
+
+        <!-- 引数の使い方は、普通の関数と同じように引数をかく-->
+        <button v-on:click="countUp2(2)">カウントアップ</button>
+
+        <!-- イベントオブジェクトとは、イベントが発生したときに取得できる全てのオブジェクト -->
+        <!-- 引数をeventとすれば、event情報を取得できる -->
+        <!-- x軸とy軸を取得 -->
+        <!-- eventと、通常の引数を同居させる場合は、「$event」と引数を書く -->
+        <p v-on:mousemove="changeMousePosition($event,10)">マウスを載せてください
+          <!-- よく使われるjavascriptの処理を、vuejsはイベント修飾子として用意している -->
+          <!-- stopPropagationは.処理を動かさない -->
+          <span v-on:mousemove.stop>ここは反応させない</span>
+          <!-- preventは、リンク先に飛ばさない -->
+          <a v-on:click.prevent="noEvent" href = "https://google.com">Google</a>
+        </p>
+        <p>X:{{x}},Y:{{y}}</p>
+
+        <!-- キー修飾子(キーボードに対する修飾子(enterとか入力時とか) -->
+        <!-- 以下の例ではspaceかenterを押した時だけイベントが発火するようになる -->
+        <input type="text" v-on:keyup.space.enter="myAlert">
+        <!-- v-onの省略記法 v-onをけして「@」をつける -->
+        <button @click="countUp">カウントアップ</button>
+
+      </div>
+      <script>
+        new Vue({
+          el: "#app",
+          data: {
+            number: 0,
+            x: 0,
+            y: 0
+          },
+          methods:{
+            countUp: function(){
+              // 必ずthisが必要となる
+              this.number ++
+            },
+            countUp2: function(times){
+              this.number += 2
+            },
+            changeMousePosition: function(event,devideNumber){
+              this.x = event.clientX / devideNumber
+              this.y = event.clientY / devideNumber
+            },
+            myAlert: function(){
+              alert('アラート')
+            }
+          }
+        })
+      </script>
+  </body>
+</html>
