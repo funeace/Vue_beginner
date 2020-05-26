@@ -1,0 +1,68 @@
+<!-- v-bindまで -->
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>My first Vue app</title>
+      <script src="https://unpkg.com/vue"></script>
+    </head>
+    <body>
+      <div id="app">
+        <!-- v-bind 続き -->
+        <!-- v-bindのhref部分はオブジェクトの要素で指定できる -->
+        <a :[attribute] = "url">Google</a>
+        <!-- v-bindで指定する要素は、オブジェクトでも可能 -->
+        <a v-bind="twitterObject">Twitter</a>
+
+        <!-- dataでurlを指定したい場合がある。 -->
+        <!-- 属性に対して、データプロパティを指定する -->
+        <!-- v-bindは htmlとは違い、引数を必要とする -->
+        <a v-bind:href="url">Google</a>
+        <!-- v-bindは省略できる -->
+        <a :href="url">Google</a>
+
+        <!-- {{}}はプレーンなテキストとしてのみ表示される。h1タグ等は保証されない -->
+        <!-- v-htmlを使えば、タグ情報を変更できる -->
+        <!-- objectの中のdataを指定する -->
+        <!-- v-htmlを使う時は、信頼のあるコンテンツのみを表示する -->
+        <div v-html="html"></div>
+
+        <!-- v-onceを使えば、一度だけ表示される -->
+        <p v-once>{{ sayHi() }}</p>
+
+        <!-- chap11. {{message}}と同じ挙動を撮る。v-textは{{}}と同じ -->
+         <p v-text="message"></p>
+
+        <!-- javascriptのように動作させることができる -->
+        <!-- テンプレート構文の呼び出し方は {{}} で括る -->
+        <p>{{ message }}</p>
+        <p>{{ number + 5}}</p>
+        <p>{{ ok ? "YES" : "NO" }}</p>
+        <p>{{ sayHi() }}</p>
+        <!-- テンプレートの中には単一の式のみ使える -->
+      </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          message: "Hello World",
+          number: 3,
+          ok: true,
+          html: "<h1>Welcome!</h1>",
+          url: "https://google.com",
+          attribute: "href",
+          twitterObject: {
+            href: "https://twitter.com",
+            id: 31
+          }
+        },
+        methods: {
+          sayHi() {
+            this.message = "Hello VueJS"
+            // vueの性質上、インスタンス内で自分のインスタンスにアクセスするときには、thisをつけないといけない
+            return "hi"
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
