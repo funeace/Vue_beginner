@@ -1,0 +1,47 @@
+<!-- templateタグ
+処理をグループ化することができる
+v-ifで複数行使いたい場合とかに使う -->
+
+<!-- v-show
+v-ifと同じことができる
+違い：
+v-ifの場合：データを消す(classとか)
+        →イベントが発生するたび、全て検証しに行く
+
+v-show: css側でdisplay:noneにするだけ
+        →templateタグが使えなくなる(templateタグのみdisplay:noneになるため)
+        →v-elseがない
+        →初期描画が遅い
+
+頻繁に切り替えることがある場合は、v-show
+実行時に殆ど画面の内容が変わらない場合は v-if
+ -->
+<!DOCTYPE html>
+  <html>
+  <head>
+    <title>My first Vue app</title>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+    <div id="app">
+      <template v-if="ok">
+        <p>Hello</p>
+        <p>GoodBye</p>
+        <p>おはよう</p>
+      </template>
+
+      
+      <p v-show="ok">Show</p>
+
+      <button @click="ok = !ok">ボタン</button>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          ok: true
+        }
+      })
+    </script>
+  </body>
+</html>
