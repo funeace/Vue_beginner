@@ -1,0 +1,70 @@
+<!-- v-model -->
+<!-- v-modelは双方向バインディングを行う -->
+<!-- テンプレートからモデルの中身を変更することができる -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My first Vue app</title>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- v-modelで指定したオブジェクトをバインドすることができる -->
+      <input type="text" v-model="message">
+      <h1>{{message}}</h1>
+
+      <!-- computedプロパティ -->
+      <!-- computedプロパティとmethodプロパティの違いは、値がキャッシュされるかどうか
+        computedプロパティは、値が依存関係に基づいてキャッシュされるため、別のメソッドが動作しても、動かない
+        methodプロパティはキャッシュされないため、別のメソッドとかで再描画されたタイミングで動作してしまう
+        大規模になればなるほど重くなる
+       -->
+      <p>{{ counter }}</p>
+      <button @click="counter += 1">+1</button>
+
+      <!-- テンプレート構文でmethodsを呼び出す時は必ず()までつける(v-のときはどっちでもいい) -->
+      <p>{{doubleCount()}}</p>
+
+      <!-- テンプレート構文でcomputedを呼び出す際は()をつけない -->
+      <p>{{lessThanThree}}</p>
+
+    </div>
+  </body>
+  <script>
+    new Vue({
+      el: "#app",
+      // dataの中身はあくまでも初期値
+      data: {
+        message: "こんにちは",
+        counter: 0
+      },
+      methods: {
+        doubleCount: function(){
+          return this.counter ** 2
+        }
+      },
+      // データを動的に扱いたい場合は、computedプロパティを使う
+      // 動作タイミングは、参照先のプロパティの値が変わった時のみ、methodsプロパティは画面の値が変わった時に動いてしまう
+      computed: {
+        lessThanThree: function(){
+          // computedは動的な値を扱うため、必ずreturnがが必要になる
+          // 別のオブジェクトにアクセスしに行くため、thisが必要となる
+          return this.counter > 3 ? '3より上' : '3以下'
+        }
+      },
+      // あるデータが変わったときに特定の処理を行いたいときにwatchをty邪y
+      watch: {
+        // モデルの値が書き換わったときに処理を行いたい場合（非同期)
+        // watchは基本的に非同期の処理で行う
+        counter: function(){
+          // watchの中では直接thisが使えないため、変数にthisをいれる
+          var vm = this
+          setTimeout(function(){
+            vm.counter = 0
+          }, 3000)
+        }
+      }
+    })
+
+  </script>
+</html>
