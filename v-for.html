@@ -1,0 +1,74 @@
+<!-- v-for 
+配列やオブジェクトをリストのように表示させるためのvタグ
+-->
+
+<!DOCTYPE html>
+  <html>
+  <head>
+    <title>My first Vue app</title>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <!-- ループに使う変数名 in モデルのデータ名 でf-forを使える-->
+        <li v-for="fruit in fruits">{{ fruit }}</li>
+
+        <!-- 変数の第２引数でindexの値を撮ることができる(each_with_indexみたいな感じ) -->
+        <li v-for="(fruit, index) in fruits">{{ index }}.{{ fruit }}</li>
+
+        <!-- objectをレンダリングする
+          以下の例の場合、valueにobjectの中身を取得できる -->
+        <li v-for="value in object">{{value}}</li>
+
+        <!-- objectをレンダリングする場合、第二引数はkey,第三引数はindexとすることができる
+          以下の例の場合、valueにobjectの中身を取得できる
+          keyはobjectの値 first_nameとか -->
+        <li v-for="(value, key,index) in object">{{index}}.{{key}}-{{value}}</li>
+      </ul>
+
+      <!-- templateタグを使うと、要素の間に何かの処理がかかっていても気にせずにコードをかけるため、便利 -->
+      <ul>
+        <template v-for="fruit in fruits">
+          <li>{{fruit}}</li>
+          <hr>
+        </template>
+      </ul>
+
+      <!-- v-forには整数値をループさせることもできる -->
+      <ul>
+        <!-- <li v-for="n in 10">{{n}}</li> -->
+        <!-- in は ofに置き換えることができる（どっちでもいい！） -->
+        <li v-for="n of 10">{{n}}</li>
+      </ul>
+
+      <!-- v-forを行う時は、必ずkeyによる対応付けを行う必要がある、
+        予期しないバグが生まれてしまうことがある-->
+      <ul>
+        <div v-for="fruit in fruits" :key="fruit">
+          <p>{{fruit}}</p>
+          <input type="text">
+        </div>
+      </ul>
+      <button @click="remove">先頭を削除</button>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          fruits: ["りんご", "ばなな", "ぶどう"],
+          object: {
+            firstName: "太郎",
+            lastName: "田中",
+            age: 21
+          },
+          methods: {
+            remove: function(){
+              this.fruits.shift()
+            }
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
