@@ -1,0 +1,54 @@
+<!-- vueのサイクル -->
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>My first Vue app</title>
+      <script src="https://unpkg.com/vue"></script>
+    </head>
+    <body>
+      <div id="app">
+        <h1>こんにちは{{name}}</h1>
+        <button @click="name = '太郎'">名前を変更</button>
+        <button @click="destroy">インスタンスを破壊</button>
+      </div>
+      <script>
+        new Vue({
+          el: "#app",
+          data: {
+            name: "けけけ"
+          },
+          // beforeCreateのアクションを実行できる
+          beforeCreate: function(){
+            console.log("beforeCreate")
+          },
+          created: function(){
+            console.log('Created')
+          },
+          beforeMount: function(){
+            console.log("beforeMount")
+          },
+          mounted: function(){
+            console.log("mounted")
+          },
+          beforeUpdate: function(){
+            console.log("beforeUpdate")
+          },
+          updated: function(){
+            console.log('updated')
+          },
+          beforeDestroy: function(){
+            console.log('beforeDestroy')
+          },
+          destroyed: function(){
+            console.log('destroyed');
+          },
+          methods: {
+            destroy: function(){
+              // 以下の記述は、vueインスタンスの破壊を行う
+              this.$destroy()
+            }
+          }
+
+  
+        })
+      </script>

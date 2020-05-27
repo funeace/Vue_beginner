@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>My first Vue app</title>
+      <script src="https://unpkg.com/vue"></script>
+    </head>
+    <body>
+      <div id="app">
+        <hello></hello>
+        <hello></hello>
+        <hello></hello>
+      </div>
+      <script>
+        // componentを定義すると全てのインスタンスでhelloを使えるようになる
+        // component引数は、名前, 
+        Vue.component('hello', {
+          template: '<p>こんにちは</p>'
+        })
+        new Vue({
+          el: "#app"
+        })
+      </script>
+    </body>
+  </html>
