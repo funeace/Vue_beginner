@@ -1,0 +1,76 @@
+<!-- 複数のvueインスタンス -->
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>My first Vue app</title>
+      <script src="https://unpkg.com/vue"></script>
+    </head>
+    <body>
+      <div id="app">
+        {{ message }}
+        {{ myData }}
+      </div>
+
+      <div id="app2"> </div>
+      <div id="app3">
+
+      </div>
+      <script>
+        // vueでは、
+        // vueは、インスタンスを読み込んだタイミングでdataの中身でgetter,setterを定義するため、
+        // インスタンスの外側でオブジェクトを定義することができない(getter,setterがないから)
+        // getterは、データを参照されたときに実行する処理
+        // setterは、データを更新されたときに実行する処理
+        // リアルタイムに値が更新される理由は、インスタンスの中でgetter,setterが定義されているから。
+        var vm = new Vue({
+          // el: "#app",
+          data: {
+            message: "こんにちは",
+            name: "けけけ"
+          },
+          // インスタンスの内側から自分のインスタンスを呼び出した場合
+          computed: {
+            myData: function(){
+              return this.$data
+            }
+          }
+        })
+        // インスタンス側で定義していないので、getter,setterがなくリアクティブにならない
+        vm.hoge = "hoge"
+        // vueインスタンスのdataを拾いたい場合は、$dataとする。vueは、ユーザー定義のオブジェクトと区別するために
+        // 頭に「$」がついている
+        console.log(vm.$data)
+
+        // $mountは、後からelプロパティを付与したいときにつける(基本的には使わない)
+        vm.$mount('#app')
+
+        // templateプロパティの練習
+        new Vue({
+          data: {
+            name: "けけけ"
+          },
+          // template: 文字列としておくと、templateの中身がelの要素として判定してくれる
+          template: "<h1>こんにちは、{{name}}さん</h1>"
+        }).$mount('#app2')
+
+
+        // render関数の練習
+        new Vue({
+          data: {
+            name: "ケケケ"
+          },
+          // 仮想DOMを使う時は引数hがよく使われる
+          // javascriptのcreateElementとは違う(renderは仮想ノード、jsは普通のノード)
+          // renderは唯の情報。仮想ノードの情報をvueは受け取って、仮想domで情報を変更している
+          render: function(createElement){
+            // 第1引数はタグ、第2引数は文字列
+            return createElement('h1','こんにちは' + this.name);
+          }
+        })
+
+        // 仮想DOMを使う理由
+        // 1. DOMを直接操作するのは遅い
+        // 2. 読み込んだタイミングで、仮想的に用意したDOM(HTML)を保持しておくことで、差分を更新するだけよくなる
+        // 3. 新しいDOMと元々もっているDOMとの差分を比較し
+      </script>
+    </body>
