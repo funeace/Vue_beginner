@@ -1,0 +1,70 @@
+<!-- コンポーネントの練習 -->
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>My first Vue app</title>
+      <script src="https://unpkg.com/vue"></script>
+    </head>
+    <body>
+      <div id="app">
+        <my-component></my-component>
+        <my-component></my-component>
+      </div>
+
+      <div id="app2">
+          <my-component></my-component>
+          <my-component></my-component>
+      </div>
+  
+      <script>
+        // 変数にcomponentのオブジェクトを登録し、インスタンス側でcomponentプロパティを使って呼び出す方法がある
+        // 一般的によく使われる
+        var component = {
+          data: function(){
+            return{
+              number: 12
+            }
+          },
+          template: '<p>いいね({{number}})<button @click="increment">+1</button></p>',
+            methods: {
+              increment: function() {
+              return this.number += 1
+            }
+          }
+        }
+
+        // // グローバルコンポーネントはどこからでも呼び出せる
+        // Vue.component("my-component",{
+        //   // componentの中ではdataは関数でなければならない
+        //   // つまり、必ずreturnしないといけない
+        //   // なぜ関数じゃないといけないのか
+        //   // componentがobjectだった場合、参照によって共有されてしまう。
+        //   // つまり、１個更新すると全部更新されてしまう
+        //   data: function(){
+        //     return{
+        //       number: 12
+        //     }
+        //   },
+        //   template: '<p>いいね({{number}})<button @click="increment">+1</button></p>',
+        //     methods: {
+        //       increment: function() {
+        //       return this.number += 1
+        //     }
+        //   }
+        // })
+
+        new Vue({
+          el: "#app",
+          components: {
+            'my-component': component
+          }
+        })
+
+        new Vue({
+          el: "#app2"
+        })
+
+
+      </script>
+    </body>
+  </html>
