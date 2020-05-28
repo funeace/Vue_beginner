@@ -1,7 +1,12 @@
 <template>
   <div>
     <LikeHeader></LikeHeader>
-    <LikeNumber></LikeNumber>
+    <p>{{ number }}</p>
+    <!-- v-on:my-clickはLikeNumberでemitしたevent -->
+    <!-- $eventで -->
+    <LikeNumber :number="number" v-on:my-click="number = $event"></LikeNumber>
+    <LikeNumber :number="number" test-props="test"></LikeNumber>
+
   </div>
 </template>
 
@@ -10,6 +15,11 @@
 import LikeHeader from "./components/LikeHeader.vue"
 
 export default {
+  data() {
+    return{
+      number: 10
+    }
+  },
   components: {
     LikeHeader: LikeHeader
   }
