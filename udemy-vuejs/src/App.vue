@@ -1,6 +1,9 @@
 <template>
   <div>
-    <LikeHeader></LikeHeader>
+    <LikeHeader>
+      <h1>トータルのいいね数</h1>
+      <h2>{{ number }}</h2>
+    </LikeHeader>
     <p>{{ number }}</p>
     <!-- v-on:my-clickはLikeNumberでemitしたevent -->
     <!-- $eventで -->
