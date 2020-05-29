@@ -1,8 +1,19 @@
 <template>
   <div>
-    <LikeHeader>
-      <h1>トータルのいいね数</h1>
-      <h2>{{ number }}</h2>
+    <LikeHeader header-text="hello">
+      <h2>みなさん</h2>
+      <!-- v-slotは、templateに定義し、処理を中に入れる。第1引数に名前をつけ、子コンポーネント側で呼び出す
+      第２引数 に任意の名前を入れれる。入れることで、子コンポーネントがv-bindでデータを送っていた場合、受け取ることができるようになる-->
+      <template v-slot:title="slotProps">
+        <h2>こんにちは</h2>
+        {{slotProps.hoge.firstName}}
+      </template>
+      <!-- v-slot:は#で置き換えられる -->
+      <template #number>
+        <p>{{ number }}</p>
+      </template>
+      <h3>はじめまして</h3>
+      <p>よろしくお願いします</p>
     </LikeHeader>
     <p>{{ number }}</p>
     <!-- v-on:my-clickはLikeNumberでemitしたevent -->
