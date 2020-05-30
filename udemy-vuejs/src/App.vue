@@ -1,5 +1,11 @@
 <template>
   <div>
+    <!-- カスタムディレクティブの勉強 -->
+    <Home>
+
+    </Home>
+
+
     <div>
       <EventTitle v-model="eventData.title"></EventTitle>
       <EventTitle v-model="eventData.title"></EventTitle>
