@@ -1,5 +1,18 @@
 <template>
   <div>
+    <!-- 動的コンポーネント -->
+    <button @click="currentComponent = 'Home'">Home</button>
+    <button @click="currentComponent = 'About'">About</button>
+    <!-- 以下の処理はcomponentタグに置き換えることができる -->
+    <!-- <About v-if="currentComponent === 'About'"></About>
+    <Home v-else></Home> -->
+    <!-- 動的なコンポーネントはcomponent :is="コンポーネント名"でおける
+    keep-aliveを使うと、動的コンポーネントでデータを削除されないようにする -->
+    <keep-alive>
+      <component :is="currentComponent"></component>
+    </keep-alive>
+    <hr>
+    <!--  -->
     <LikeHeader header-text="hello">
       <h2>みなさん</h2>
       <!-- v-slotは、templateに定義し、処理を中に入れる。第1引数に名前をつけ、子コンポーネント側で呼び出す
@@ -27,15 +40,20 @@
 <script>
 // ローカルで利用したい場合は、vueファイル側で
 import LikeHeader from "./components/LikeHeader.vue"
+import Home from "./components/Home.vue"
+import About from "./components/About.vue"
 
 export default {
   data() {
     return{
-      number: 10
+      number: 10,
+      currentComponent: "Home"
     }
   },
   components: {
-    LikeHeader: LikeHeader
+    LikeHeader: LikeHeader,
+    About: About,
+    Home: Home
   }
 }
 </script>
