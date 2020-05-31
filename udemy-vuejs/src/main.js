@@ -30,6 +30,18 @@ Vue.directive("border", function(el, binding){
 // インポートしたデータをLikeNumberで呼び出せるように定義
 Vue.component('LikeNumber',LikeNumber)
 
+// フィルターの定義
+Vue.filter("upperCase", function(value){
+  return value.toUpperCase()
+})
+
+// 全てのvueインスタンスにオプションがマージされてしまうので、使う時は気を付ける
+Vue.mixin({
+  created(){
+    console.log("global mixin")
+  }
+})
+
 // index.htmlの#appを指定
 new Vue({
   render: h => h(App),
