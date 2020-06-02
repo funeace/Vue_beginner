@@ -6,6 +6,6 @@
     <!-- active-classは要素がactiveになったときクラスが付与される -->
     <!-- exactはurlとto=""の値が完全一致したら発火するようにできる -->
     <router-link to="/" active-class="link--active" exact tag="a" class="link">Home</router-link>
-    <router-link to="/users" active-class="link--active" exact tag="a" class="link">Users</router-link>
+    <router-link to="/users/1" active-class="link--active" exact tag="a" class="link">Users</router-link>
   </nav>
 </template>
