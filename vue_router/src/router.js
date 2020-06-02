@@ -1,23 +1,23 @@
 // vue-routerを使うためのファイル
 import Vue from 'vue';
 import Router from 'vue-router';
-// import Home from './views/Home.vue';
-// import Users from './views/Users.vue';
-// import UsersProfile from './views/UsersProfile.vue';
-// import UsersPosts from './views/UsersPosts.vue';
-// import HeaderHome from './views/HeaderHome.vue';
-// import HeaderUsers from './views/HeaderUsers.vue';
+import Home from './views/Home.vue';
+import Users from './views/Users.vue';
+import UsersProfile from './views/UsersProfile.vue';
+import UsersPosts from './views/UsersPosts.vue';
+import HeaderHome from './views/HeaderHome.vue';
+import HeaderUsers from './views/HeaderUsers.vue';
 
 // webpackで呼び出す処理
 // 必要になったタイミングで呼び出されるようになる
 // import(/*webpackChunkName::"任意の名前"*/ ,"./views/Home.vue");とすることで名前をつけられる
 // vuecli3では、分割して全てのファイルを呼び出す。アイドルタイム中にこっそり動いて、キャッシュに保管される
-const Home = () => import("./views/Home.vue");
-const Users = () => import('./views/Users.vue');
-const UsersProfile = () => import('./views/UsersProfile.vue');
-const UsersPosts = () => import('./views/UsersPosts.vue');
-const HeaderHome = () => import('./views/HeaderHome.vue');
-const HeaderUsers = () => import('./views/HeaderUsers.vue');
+// const Home = () => import('./views/Home.vue');
+// const Users = () => import('./views/Users.vue');
+// const UsersProfile = () => import('./views/UsersProfile.vue');
+// const UsersPosts = () => import('./views/UsersPosts.vue');
+// const HeaderHome = () => import('./views/HeaderHome.vue');
+// const HeaderUsers = () => import('./views/HeaderUsers.vue');
 
 // Vue.useとすることで公式で提供しているプラグインを利用できるようになる
 Vue.use(Router)

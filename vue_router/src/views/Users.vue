@@ -39,22 +39,22 @@
       })
     },
 
-    // 同一コンポーネント内で処理された時に発火する
-    beforeRouteUpdate(to, from, next){
-      next()
-    },
+    // // 同一コンポーネント内で処理された時に発火する
+    // beforeRouteUpdate(to, from, next){
+    //   next()
+    // },
 
     // 別コンポーネントに移動する時に発火される
     // よく使われるパターンとして、画面遷移時の確認など
     // next falseとすると移動しない
-    beforeRouteLeave(to, from, next){
-      const isLeave = window.confirm("本当にこのページを離れますか？")
-      if (isLeave) {
-        next()
-      } else {
-        next(false)
-      }
-    },
+    // beforeRouteLeave(to, from, next){
+    //   const isLeave = window.confirm("本当にこのページを離れますか？")
+    //   if (isLeave) {
+    //     next()
+    //   } else {
+    //     next(false)
+    //   }
+    // },
 
   }
 </script>
